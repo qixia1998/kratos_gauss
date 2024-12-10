@@ -1,0 +1,4 @@
+# 这里引入了 consul 的服务注册与发现，先把配置加入进去
+consul:
+  address: 127.0.0.1:8500
+  scheme: http

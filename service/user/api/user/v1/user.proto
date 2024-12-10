@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package api.user.v1;
+import "google/api/annotations.proto";
+
+option go_package = "user/api/user/v1;v1";
+
+service User {
+	rpc CreateUser (CreateUserRequest) returns (CreateUserReply) {
+		option (google.api.http) = {
+			post: "/v1/user/create"
+			body: "*"
+		};
+	};
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply) {
+		option (google.api.http) = {
+			put: "/v1/user/update"
+			body: "*"
+		};
+	};
+	rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply) {
+		option (google.api.http) = {
+			delete: "/v1/user/delete/{id}"
+		};
+	};
+	rpc GetUser (GetUserRequest) returns (GetUserReply) {
+		option (google.api.http) = {
+			get: "/v1/user/get/{id}"
+		};
+	};
+}
+
+message CreateUserRequest {
+	string name = 1;
+	string password = 2;
+	string mobile = 3;
+	string gender = 4;
+}
+message CreateUserReply {
+	int64 id = 1;
+	string password = 2;
+	string mobile = 3;
+	string name = 4;
+	string gender = 5;
+}
+
+message UpdateUserRequest {
+	int64 id = 1;
+	string name = 2;
+	string password = 3;
+	string mobile = 4;
+	string gender = 5;
+}
+message UpdateUserReply {
+	bool success = 1;
+}
+
+message DeleteUserRequest {
+	int64 id = 1;
+}
+message DeleteUserReply {
+	bool success = 1;
+}
+
+message GetUserRequest {
+	int64 id = 1;
+}
+message GetUserReply {
+	int64 id = 1;
+	string password = 2;
+	string mobile = 3;
+	string name = 4;
+	string gender = 5;
+}
